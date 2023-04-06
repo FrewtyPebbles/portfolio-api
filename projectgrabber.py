@@ -50,14 +50,14 @@ def project_grabber(program_name:str, path:str):
                     if file.is_file():
                         if (file.name.split(".")[1] in {"jpg","jpeg","png"}) \
                             if "." in file.name else False:
-                            stack[len(stack)-1][str(pl.Path(client_path, file.name))] = f"http://127.0.0.1:5000/{str(pl.Path(f_path, file.name))}"
+                            stack[len(stack)-1][file.name] = f"http://127.0.0.1:5000/{str(pl.Path(f_path, file.name))}"
                         else:
                             try:
                                 f_obj = open(pl.Path(f_path, file.name))
-                                stack[len(stack)-1][str(pl.Path(client_path, file.name))] = f_obj.read()
+                                stack[len(stack)-1][file.name] = f_obj.read()
                                 f_obj.close()
                             except:
-                                stack[len(stack)-1][str(pl.Path(client_path, file.name))] = "Cannot render binaries with UTF-8 characters."
+                                stack[len(stack)-1][file.name] = "Cannot render binaries with UTF-8 characters."
                     elif file.is_dir():
                         client_path = pl.Path(client_path, file.name)
                         f_path = pl.Path(f_path, file.name)
